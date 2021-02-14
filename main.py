@@ -36,6 +36,20 @@ class Account:
   def init_dummy(self):
     self.balance = 0
     self.transactions = 0
+
+  def update_balance(self):
+    file = open('record.txt', 'r')
+    confirm = input('Would you like to modify this transaction your balance is ' + file.read() + '\n' + 'type yes or no: ')
+    if confirm == 'yes':
+      deposit = input('how much would you like deposit ? ')
+      self.balance = int(deposit)
+      transactionHistory =  "\n" + 'Your account balance is $' + str(self.balance) + "\n"
+      path = open('record.txt', 'w')
+      path.writelines(transactionHistory)
+    else:
+      return
+
+    # file = open('record.txt', 'w')
     
 
     
@@ -54,6 +68,8 @@ while boolean:
     acct.make_deposit()
   elif(int(selection) == 2):
     acct.get_balance()
+  elif(int(selection) == 3):
+    acct.update_balance()
   else:
     boolean = False
     break
